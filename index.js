@@ -1,19 +1,19 @@
-// Завдання 1
+// Task 1
 /**
- * Функція `replaceText` замінює всі входження певного слова у тексті на задану фразу.
+ * The `replaceText` function replaces all occurrences of a specific word in the text with a given phrase.
  *
- *  word - Слово для заміни.
- *  replacement - Фраза, якою треба замінити слово.
- *  text - Текст, у якому треба здійснити заміну.
+ *  word - The word to be replaced.
+ *  replacement - The phrase to replace the word with.
+ *  text - The text in which the replacement should be made.
  */
 function replaceText(word, replacement, text) {
-  // Створення регулярного виразу для пошуку слова з флагом 'g' (глобальний пошук).
-  // Використання методу `replace` регулярного виразу для заміни слова на фразу у тексті.
-  // Повернення заміненого тексту.
+  const regex = new RegExp(word, 'g');
+  const replacedText = text.replace(regex, replacement);
+  return replacedText;
 }
 
-// Перевірка
-console.log("Завдання 1 ==============================");
+// Test
+console.log("Task 1 ==============================");
 console.log(
   replaceText(
     "example",
@@ -21,89 +21,90 @@ console.log(
     "This is an example sentence. Another example is here."
   )
 );
-// Виведе This is an sample text sentence. Another sample text is here.
+// Output: This is a sample text sentence. Another sample text is here.
 
-// Завдання 2
+// Task 2
 
 /**
- * Функція `checkWord` перевіряє, чи міститься певне слово у тексті.
+ * The `checkWord` function checks if a specific word is present in the text.
  *
- *  word - Слово для перевірки.
- *  text - Текст, який треба перевірити.
+ *  word - The word to check for.
+ *  text - The text in which to check.
  */
 function checkWord(word, text) {
-  // Створення регулярного виразу для пошуку слова з флагом 'i' (регістронезалежний пошук).
-  // Використання методу `test` регулярного виразу для перевірки наявності слова у тексті.
-  // Повернення результату перевірки.
+  const regex = new RegExp(word, 'i');
+  return regex.test(text);
 }
 
-// Перевірка
-console.log("Завдання 2 ==============================");
+// Test
+console.log("Task 2 ==============================");
 console.log(checkWord("example", "This is an example sentence."));
-// Виведе true
+// Output: true
 
-// Завдання 3
+// Task 3
 
 /**
- * Функція `extractTextInParentheses` вилучає текст, який знаходиться в круглих дужках, з рядка.
+ * The `extractTextInParentheses` function extracts the text inside parentheses from a string.
  *
- *  str - Рядок, з якого треба вилучити текст.
+ *  str - The string from which to extract the text.
  */
 function extractTextInParentheses(str) {
-  // Створення регулярного виразу з використанням зворотніх посилань для пошуку тексту в круглих дужках /\((.*?)\)/g.
-  // Використання методу `matchAll` для отримання всіх збігів регулярного виразу.
-  // Створення масиву зі знайденими текстами.
-  // Повернення масиву вилучених текстів.
+  const regex = /\((.*?)\)/g;
+  const matches = str.matchAll(regex);
+  let extractedTexts = Array.from(matches, (match) => match[1]);
+  return extractedTexts;
 }
 
-// Перевірка
-console.log("Завдання 3 ==============================");
+// Test
+console.log("Task 3 ==============================");
 
 console.log(extractTextInParentheses("I have some (text) in (parentheses)."));
-// Виведе [ 'text', 'parentheses' ]
+// Output: [ 'text', 'parentheses' ]
 
-// Завдання 4
+// Task 4
 
 /**
- * Функція `countEmails` знаходить та підраховує кількість email-адрес у рядку.
+ * The `countEmails` function finds and counts the number of email addresses in a string.
  *
- *  str - Рядок, в якому потрібно знайти email-адреси.
+ *  str - The string in which to find email addresses.
  */
 function countEmails(str) {
-  // Створення регулярного виразу для пошуку email-адрес /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g.
-  // Використання методу `match` для отримання всіх збігів регулярного виразу.
-  // Підрахунок кількості email-адрес.
-  // Повернення кількості email-адрес.
+  const regex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
+  const matches = str.match(regex);
+  const count = matches ? matches.length : 0;
+  return count;
 }
 
-// Перевірка
-console.log("Завдання 4 ==============================");
+// Test
+console.log("Task 4 ==============================");
 
 console.log(
   countEmails("Emails: john@example.com, kate@example.com, mike@example.com")
 );
-// Виведе  3
+// Output: 3
 
-// Завдання 5
+// Task 5
 /**
- * Функція `findWordOccurrences` знаходить всі входження заданого слова у рядок з урахуванням ігнорування регістру.
+ * The `findWordOccurrences` function finds all occurrences of a given word in a string, ignoring case sensitivity.
  *
- *  str - Рядок, в якому потрібно знайти входження слова.
- *  word - Слово, входження якого потрібно знайти.
- *  Повертає масив з індексами всіх входжень слова у рядок.
+ *  str - The string in which to find occurrences of the word.
+ *  word - The word to find occurrences of.
+ *  Returns an array of indexes of all occurrences of the word in the string.
  */
 function findWordOccurrences(str, word) {
-  // Створення регулярного виразу для пошуку слова з флагами 'g та 'i',
-  // Створюємо пустий масив matches, та змінну match без значення
-  // За допомогою циклу whild створюємо ітерацію поки рядок містить збіги з регулярним виразом, та змінній match присвоюємо збіги
-  // Додавання індексу поточного входження слова у масив.
-  // Оновлення lastIndex,присвоєюмо йому значення  match.index + 1, щоб продовжити пошук з наступного символу
-  // Повертаємо масив
+  const regex = new RegExp(word, "gi");
+  let matches = [];
+  let match;
+  while ((match = regex.exec(str))) {
+    matches.push(match.index);
+    regex.lastIndex = match.index + 1;
+  }
+  return matches;
 }
 
-// Перевірка
+// Test
 
-console.log("Завдання 5 ==============================");
+console.log("Task 5 ==============================");
 
 console.log(
   findWordOccurrences(
@@ -111,47 +112,48 @@ console.log(
     "fox"
   )
 );
-// Виведе  [ 16, 49 ]
+// Output: [ 16, 49 ]
 
-// Завдання 6
+// Task 6
 
 /**
- * Функція `checkRegexFlags` перевіряє регулярний вираз на наявність флагів 'g' та 'm'.
+ * The `checkRegexFlags` function checks if the regular expression has the 'g' and 'm' flags.
  *
- *  regex - Регулярний вираз, який потрібно перевірити.
- * Повертає  - true, якщо флаги 'g' та 'm' присутні, інакше - false.
+ *  regex - The regular expression to check.
+ * Returns - true if the 'g' and 'm' flags are present, otherwise - false.
  */
 function checkRegexFlags(regex) {
-  // Отримуємо всі флаги регулярного виразу.
-  // Перевіряємо наявність флагів 'g' та 'm' за допомогою методу `includes`.
-  // Повертаємо  - true, якщо флаги 'g' та 'm' присутні, інакше - false
+  const flags = regex.flags;
+  const hasGlobalFlag = flags.includes("g");
+  const hasMultilineFlag = flags.includes("m");
+  return hasGlobalFlag && hasMultilineFlag;
 }
 
-// Перевірка
+// Test
 
-console.log("Завдання 6 ==============================");
+console.log("Task 6 ==============================");
 
 console.log(checkRegexFlags(/pattern/gm));
-// Виведе true
+// Output: true
 
-// Завдання 7
+// Task 7
 
 /**
- * Функція `replaceWordOccurrences` замінює всі входження заданого слова у рядку на нове слово.
+ * The `replaceWordOccurrences` function replaces all occurrences of a given word in a string with a new word.
  *
- *  str - Рядок, в якому потрібно замінити входження слова.
- *  word - Слово, яке потрібно замінити.
- *  newWord - Нове слово, яким потрібно замінити.
- * Повертає  - Результат заміни входжень слова у рядку.
+ *  str - The string in which to replace occurrences of the word.
+ *  word - The word to replace.
+ *  newWord - The new word to replace with.
+ * Returns - The result of replacing the occurrences of the word in the string.
  */
 function replaceWordOccurrences(str, word, newWord) {
-  // Створюємо регулярний вираз зі словом, використовуючи флаг 'g' для глобального пошуку всіх входжень.
-  // Заміняємо всі входження слова у рядку на нове слово.
-  // Повертаємо результат
+  const regex = new RegExp(word, 'g');
+  const replacedStr = str.replaceAll(regex, newWord);
+  return replacedStr;
 }
 
-// Перевірка
-console.log("Завдання 7 ==============================");
+// Test
+console.log("Task 7 ==============================");
 
 console.log(
   replaceWordOccurrences(
@@ -160,73 +162,83 @@ console.log(
     "cat"
   )
 );
-// Виведе The quick brown cat jumps over the lazy dog. The cat is quick.
+// Output: The quick brown cat jumps over the lazy dog. The cat is quick.
 
-// Завдання 8
+// Task 8
 
 /**
- * Функція `checkFlags` перевіряє, які флаги використовуються в заданому регулярному виразі.
+ * The `checkFlags` function checks which flags are used in a given regular expression.
  *
- *  regex - Регулярний вираз для перевірки.
- * Повертає  - Масив флагів, які використовуються у регулярному виразі.
+ *  regex - The regular expression to check.
+ * Returns - An array of flags used in the regular expression.
  */
 function checkFlags(regex) {
-  // Створюємо масив для зберігання використаних флагів.
-  // Перевіряємо, чи використовується флаг 'i' (ignoreCase) у регулярному виразі.
-  // Додаємо флаг ignoreCase до масиву, якщо він використовується.
-  // Отримуємо вихідний код регулярного виразу за допомогою властивості `source`.
-  // Додаємо вихідний код до масиву
-  // Повертаємо масив використаних флагів.
+  const usedFlags = [];
+  const hasIgnoreCase = regex.ignoreCase;
+  if (hasIgnoreCase) {
+    usedFlags.push("ignoreCase");
+  }
+  const sourceCode = regex.source;
+  usedFlags.push(sourceCode);
+  return usedFlags;
 }
 
-// Приклад використання:
-console.log("Завдання 8 ==============================");
+// Example usage:
+console.log("Task 8 ==============================");
 
 console.log(checkFlags(/pattern/gimsy));
-// Виведе[ 'ignoreCase', 'pattern' ]
+// Output: [ 'ignoreCase', 'pattern' ]
 
-// Завдання 9
+// Task 9
 
 /**
- * Функція `checkRegexMethods` перевіряє, які методи використовуються в заданому регулярному виразі.
+ * The `checkRegexMethods` function checks which methods are used in a given regular expression.
  *
- *  regex - Регулярний вираз для перевірки.
- * Повертає  - Масив методів, які використовуються у регулярному виразі.
+ *  regex - The regular expression to check.
+ * Returns - An array of methods used in the regular expression.
  */
 function checkRegexMethods(regex) {
-  // Створюємо масив для зберігання використаних методів.
-  // Перевіряємо, чи використовується метод `dotAll`.
-  // Перевіряємо, чи використовується метод `multiline`.
-  // Перевіряємо, чи використовується метод `sticky`.
-  // Повертаємо масив використаних методів.
+  const usedMethods = [];
+  if (regex.dotAll) {
+    usedMethods.push("dotAll");
+  }
+  if (regex.multiline) {
+    usedMethods.push("multiline");
+  }
+  if (regex.sticky) {
+    usedMethods.push("sticky");
+  }
+  return usedMethods;
 }
 
-// Приклад використання:
-console.log("Завдання 9 ==============================");
+// Example usage:
+console.log("Task 9 ==============================");
 
 console.log(checkRegexMethods(/test/msy));
-// Виведе [ 'dotAll', 'multiline', 'sticky' ]
+// Output: [ 'dotAll', 'multiline', 'sticky' ]
 
-// Завдання 10
+// Task 10
 
 /**
- * Функція `findWord` знаходить перше входження заданого слова у рядок за допомогою методу `search`.
+ * The `findWord` function finds the first occurrence of a given word in a string using the `search` method.
  *
- *  str - Рядок, в якому потрібно знайти входження слова.
- *  word - Слово, входження якого потрібно знайти.
- * Повертає  - Індекс першого входження слова у рядок або -1, якщо слово не знайдено.
+ *  str - The string in which to find the occurrence of the word.
+ *  word - The word to find the occurrence of.
+ * Returns - The index of the first occurrence of the word in the string or -1 if the word is not found.
  */
 function findWord(str, word) {
-  // Створення регулярного виразу для пошуку слова.
-  // Використання методу `search` для пошуку першого входження слова.
+  const regex = new RegExp(word);
+  const index = str.search(regex);
+  return index;
 }
 
-// Приклад використання:
-console.log("Завдання 10 ==============================");
+// Example usage:
+console.log("Task 10 ==============================");
 
 console.log(
   findWord(
     "The quick brown fox jumps over the lazy dog. The fox is quick.",
     "quick"
   )
-); // Виведе: 4
+); // Output: 4
+
